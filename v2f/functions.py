@@ -5,7 +5,7 @@ import collections
 # test for art
 try:
     import pysam
-except:
+except ModuleNotFoundError:
     sys.exit("pysam is not installed. Try: pip install pysam")
 
 # this function gets everything processed to produce a set
