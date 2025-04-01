@@ -362,7 +362,7 @@ def filterFeatureInGFF(gff, feat):
     for gene in gff.keys():
         if len(gff[gene][feat]) != 0:
             filtered_gff[gene] = gff[gene][feat]
-        else:
+        elif gene in filtered_gff.keys():
             _ = filtered_gff.pop(gene)
     return filtered_gff
 
