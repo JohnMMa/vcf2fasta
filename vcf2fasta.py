@@ -9,12 +9,12 @@ import os
 # test for art
 try:
     import pysam
-except:
+except ModuleNotFoundError:
     sys.exit("pysam is not installed. Try: pip install pysam")
 # test for art
 try:
     import art
-except:
+except ModuleNotFoundError:
     sys.exit("art is not installed. Try: pip install art")
 
 import v2f.functions as v2f
