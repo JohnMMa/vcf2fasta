@@ -71,7 +71,7 @@ def getSequences(
         refseq = ref.fetch(chrom, start, end).upper()
         # propagate reference sequence to all samples
         for sample in seqs[featname].keys(): tmpseqs[sample] = refseq
-        # initialize posiitive or negative postions to extend
+        # initialize positive or negative positions to extend
         # in case of indels
         posadd = 0
         for vrec in vcf.fetch(chrom, start, end):
