@@ -24,6 +24,15 @@ def getSequences(
     # prep sequence dictionary
     if args.blend:
         seqs[gene] = collections.defaultdict()
+        for rec in intervals[gene]:
+            if len(intervals[gene]) >= 2:
+                new_intervals = intervals[gene]
+                if args.gff:
+                    if new_intervals[0][6] == '-':
+                        new_intervals = sorted(new_intervals, reverse=True, key=lambda x:int(x[3]))
+                    elif new_intervals[0][6] == '+':
+                        new_intervals = sorted(new_intervals, reverse=False, key=lambda x:int(x[3]))
+                    intervals[gene] = new_intervals
     else:
         feat_ind = 0
         if args.feat:
