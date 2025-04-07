@@ -96,10 +96,13 @@ def getSequences(
             # this is the cumulative number of positions to add if
             # positions are take or are added to the sequence
             posadd += max_len - ref_len
-        for sample in seqs[featname].keys(): seqs[featname][sample] = seqs[featname][sample] + tmpseqs[sample]
         # reverse complement sequence if needed
         if strand == "-":
-            for sample in seqs[featname].keys(): seqs[featname][sample] = revcomp(seqs[featname][sample])
+            revseqs = {}
+            for sample in tmpseqs:
+                revseqs[sample] = revcomp(tmpseqs[sample])
+            tmpseqs = revseqs.copy()
+        for sample in seqs[featname].keys(): seqs[featname][sample] = seqs[featname][sample] + tmpseqs[sample]
     # adjust if inframe is on
     if args.inframe:
         if args.blend and codon_start[featname][0] != ".":
