@@ -244,7 +244,7 @@ def getFeature(file):
     features = collections.defaultdict()
     with open(file, "r") as f:
         for line in f:
-            if line[0] != "#":
+            if (line.rstrip() != '') and (not(line[0].startswith("#"))):
                 fields = line.rstrip().split("\t")
                 features[fields[2]] = None
     return list(features.keys())
@@ -258,7 +258,7 @@ def getGeneNames(file, format):
     with open(file, "r") as f:
         if format == "gff":
             for line in f:
-                if line[0] != "#":
+                if (line.rstrip() != '') and (not(line[0].startswith("#"))):
                     fields = line.rstrip().split("\t")
                     last = processGeneNameGFF(fields[8])
                     if last.get('Name'):
@@ -269,7 +269,7 @@ def getGeneNames(file, format):
                         geneNames[last['ID']] = None
         elif format == "gtf":
             for line in f:
-                if line[0] != "#":
+                if (line.rstrip() != '') and (not(line[0].startswith("#"))):
                     fields = line.rstrip().split("\t")
                     last = processGeneNameGTF(fields[8])
                     if last.get('transcript_id'):
@@ -341,7 +341,8 @@ def ReadGFF(file, parser):
     with open(file, "r") as f:
         if format == "gff":
             for line in f:
-                if line[0] != "#":
+                line = line.rstrip()
+                if (line.rstrip() != '') and (not(line[0].startswith("#"))):
                     fields = line.rstrip().split("\t")
                     last = processGeneNameGFF(fields[8])
                     if last.get('Name'):
@@ -356,7 +357,7 @@ def ReadGFF(file, parser):
                     #     gff[last['Name']][fields[2]].append(fields)
         elif format == "gtf":
             for line in f:
-                if line[0] != "#":
+                if (line.rstrip() != '') and (not(line[0].startswith("#"))):
                     fields = line.rstrip().split("\t")
                     last = processGeneNameGTF(fields[8])
                     if last.get('transcript_id'):
